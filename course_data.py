@@ -24,3 +24,10 @@ def get_course_numbers(courses):
             numbers.append(course["course"])
 
     return numbers
+
+
+def display_course_numbers(courses):
+    print("Available Courses:")
+
+    for course in get_course_numbers(courses):
+        print(course)
