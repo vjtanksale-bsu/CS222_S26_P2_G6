@@ -21,3 +21,8 @@ class TestCourseData(unittest.TestCase):
         courses = read_course_data(self.filename)
 
         self.assertEqual(len(courses), 3)
+        self.assertEqual(courses[0]["course"], "CS120")
+        self.assertEqual(courses[0]["section"], "001")
+        self.assertEqual(courses[0]["days"], "MWF")
+        self.assertEqual(courses[0]["start"], 900)
+        self.assertEqual(courses[0]["end"], 950)
