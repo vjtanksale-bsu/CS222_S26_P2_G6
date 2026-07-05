@@ -14,3 +14,13 @@ def read_course_data(filename):
             })
 
     return courses
+
+
+def get_course_numbers(courses):
+    numbers = []
+
+    for course in courses:
+        if course["course"] not in numbers:
+            numbers.append(course["course"])
+
+    return numbers
