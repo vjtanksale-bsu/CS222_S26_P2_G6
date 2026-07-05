@@ -4,7 +4,8 @@ def read_course_data(filename):
     with open(filename, "r") as file:
         for line in file:
             parts = line.strip().split()
-
+            if not parts:
+                continue
             courses.append({
                 "course": parts[0],
                 "section": parts[1],
