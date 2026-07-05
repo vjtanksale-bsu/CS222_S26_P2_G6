@@ -56,3 +56,15 @@ class TestCourseData(unittest.TestCase):
         self.assertIn("Available Courses", output)
         self.assertIn("CS120", output)
         self.assertIn("CS121", output)
+    def test_read_course_data_skips_empty_lines(self):
+        
+        with open(self.filename, "w") as file:
+            file.write("CS120 001 MWF 0900 0950\n")
+            file.write("\n")
+            file.write("CS120 002 TR 1100 1215\n")
+
+        courses = read_course_data(self.filename)
+
+        self.assertEqual(len(courses), 2)
+        self.assertEqual(courses[0]["course"], "CS120")
+        self.assertEqual(courses[1]["course"], "CS120")
