@@ -1,10 +1,12 @@
-﻿from conflict_detection import has_conflict
+﻿from collections import defaultdict
+from conflict_detection import has_conflict
+
 
 def generate_schedule(selected_courses, all_sections):
-    course_sections = {
-        course: [s for s in all_sections if s["course"] == course]
-        for course in selected_courses
-    }
+    course_sections = defaultdict(list)
+
+    for section in all_sections:
+        course_sections[section["course"]].append(section)
 
     def backtrack(index, current_schedule):
         if index == len(selected_courses):
