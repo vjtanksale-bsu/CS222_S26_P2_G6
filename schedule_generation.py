@@ -1,4 +1,6 @@
-﻿from conflict_detection import has_conflict
+﻿from collections import defaultdict
+from conflict_detection import has_conflict
+
 
 
 def order_courses_by_section_count(selected_courses, all_sections):
@@ -8,10 +10,10 @@ def order_courses_by_section_count(selected_courses, all_sections):
 
 
 def generate_schedule(selected_courses, all_sections):
-    course_sections = {
-        course: [s for s in all_sections if s["course"] == course]
-        for course in selected_courses
-    }
+    course_sections = defaultdict(list)
+
+    for section in all_sections:
+        course_sections[section["course"]].append(section)
 
     ordered_courses = order_courses_by_section_count(selected_courses, all_sections)
 
