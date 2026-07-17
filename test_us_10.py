@@ -1,4 +1,5 @@
 import time
+import unittest
 
 from schedule_generation import generate_schedule
 
@@ -16,16 +17,21 @@ def make_dataset(num_courses=10, sections_per_course=10):
                 "days": "M",
                 "start": start,
                 "end": end,
-                "id": f"{c}-S{j}",
+                "section": f"{c}-S{j}",
             })
     return selected, sections
 
 
-def test_us_10_performance():
-    selected, sections = make_dataset(10, 10)
-    t0 = time.perf_counter()
-    schedule = generate_schedule(selected, sections)
-    elapsed = time.perf_counter() - t0
-    print(f"US-10 baseline: generate_schedule for {len(selected)} courses x 10 sections = {elapsed:.6f} seconds")
-    assert schedule is not None
-    assert len(schedule) == len(selected)
+class TestUS10Performance(unittest.TestCase):
+    def test_us_10_performance(self):
+        selected, sections = make_dataset(10, 10)
+        t0 = time.perf_counter()
+        schedule = generate_schedule(selected, sections)
+        elapsed = time.perf_counter() - t0
+        print(f"US-10 baseline: generate_schedule for {len(selected)} courses x 10 sections = {elapsed:.6f} seconds")
+        self.assertIsNotNone(schedule)
+        self.assertEqual(len(schedule), len(selected))
+
+
+if __name__ == "__main__":
+    unittest.main()
